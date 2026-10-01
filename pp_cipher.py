@@ -38,48 +38,35 @@ def order_dict(text, i_dict):
     return new_dict
 
 def encrypt_to_image(text, cipher_dict, output_file, symbol_folder=None):
-    # Reverse dictionary so letters map to numbers
     reverse = {v: k for k, v in cipher_dict.items()}
-
     images = []
 
     for char in text.upper():
         if char in reverse:
             file_name = f"{reverse[char]}.jpg"
-
             if symbol_folder is not None:
                 file_name = os.path.join(symbol_folder, file_name)
-
             images.append(Image.open(file_name))
-
         elif char == " ":
             images.append(None)
 
     if not any(images):
         print("No valid symbols found.")
         return
-    
     # Determine dimensions
     symbol_width = max(img.width for img in images if img)
     symbol_height = max(img.height for img in images if img)
-
     spacer = 10
-
     total_width = 0
+    
     for img in images:
         if img:
             total_width += img.width + spacer
         else:
             total_width += symbol_width
 
-    output = Image.new(
-        "RGB",
-        (total_width, symbol_height),
-        "white"
-    )
-
+    output = Image.new("RGB", (total_width, symbol_height), "white")
     x = 0
-
     for img in images:
         if img:
             output.paste(img, (x, 0))
