@@ -90,16 +90,9 @@ def encrypt_to_image(text, cipher_dict, output_file, symbol_folder=None):
     output.save(output_file)
     print(f"Saved: {output_file}")
 
-t_dict = { 0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'J', 10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S', 19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y', 25: 'Z' }
-print(f't_dict: \n{t_dict}\n')
+base_dict = { 0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'J', 10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S', 19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y', 25: 'Z' }
+encrypted_dict = order_dict(msg, base_dict)
 
 msg = "Hello World"
-
-e_msg = encrypt(msg, t_dict)  # Encrypted Message:  7 4 11 11 14   22 14 17 11 3
-
-e_dict = order_dict(msg, t_dict)
-print(f'e_dict: \n{e_dict}')
-
-new_msg = encrypt(msg, e_dict)  # New Encrypted Message:  0 1 2 2 3   4 3 5 2 6
-
-
+encrypted_msg = encrypt(msg, encrypted_dict)  # Encrypted Message:  0 1 2 2 3   4 3 5 2 6
+encrypt_to_image(msg, encrypted_dict, "encypted_image.jpg", "symbols")
