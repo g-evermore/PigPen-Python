@@ -95,4 +95,4 @@ encrypted_dict = order_dict(msg, base_dict)
 
 msg = "Hello World"
 encrypted_msg = encrypt(msg, encrypted_dict)  # Encrypted Message:  0 1 2 2 3   4 3 5 2 6
-encrypt_to_image(msg, encrypted_dict, "encypted_image.jpg", "symbols")
+encrypt_to_image(encrypted_msg, encrypted_dict, "encypted_image.jpg", "symbols")
